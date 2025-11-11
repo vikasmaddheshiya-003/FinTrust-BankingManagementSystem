@@ -159,9 +159,9 @@
 
                 <!-- 🌟 Action Buttons (Centered with Flexbox) -->
                 <div style="display:flex; justify-content:center; gap:20px; margin-top:15px;">
-                    <button label="✅ Submit Request" sclass="btn-primary" width="160px"
-                            onClick="@command('submitRequest')" />
-                    <button label="❌ Cancel" sclass="btn-secondary" width="120px"
+                    <button label="Submit Request" sclass="btn-primary" width="160px"
+                           id="submitApplyCard" />
+                    <button label=" Cancel" sclass="btn-secondary" width="120px"
                             onClick="@command('goBack')" />
                 </div>
             </div>

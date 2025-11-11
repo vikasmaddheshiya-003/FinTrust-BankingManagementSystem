@@ -13,19 +13,20 @@
                 <listcell label="${each.cardType}"/>
                 <listcell label="${each.status}"/>
                 <listcell>
-                    <button label="Block" onClick='@command("blockCard", card=each)'/>
+                    <button  label="Block" />
                     <button label="Unblock" onClick='@command("unblockCard", card=each)'/>
                 </listcell>
             </listitem>
         </listbox>
     </vlayout>
+    
 </window>
 </zk>
  -->  
  
  
  <zk>
-<window title="Manage Existing Cards" border="normal" width="90%" >
+<window title="Manage Existing Cards" border="normal" width="100%" >
 
     <vlayout spacing="15px">
         <label value="Issued Cards" style="font-size:18px;font-weight:bold;color:#0a66c2"/>
