@@ -2,5 +2,5 @@
 <window title="Hello World!!" border="normal" width="200px">
 
 <label value="You are using: ${desktop.webApp.version}"/>
-
+sdvsdfsdcvsdvsdvsdvsdvdfbgdfbdfbd
 </window>
