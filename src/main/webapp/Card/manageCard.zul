@@ -1,0 +1,56 @@
+<!-- <zk>
+<window title="Manage Existing Cards" border="normal" width="90%" >
+    <vlayout spacing="15px">
+        <listbox id="cardList" mold="paging" pageSize="5" width="100%">
+            <listhead>
+                <listheader label="Card Number"/>
+                <listheader label="Type"/>
+                <listheader label="Status"/>
+                <listheader label="Action"/>
+            </listhead>
+            <listitem forEach="${cards}">
+                <listcell label="${each.cardNumber}"/>
+                <listcell label="${each.cardType}"/>
+                <listcell label="${each.status}"/>
+                <listcell>
+                    <button label="Block" onClick='@command("blockCard", card=each)'/>
+                    <button label="Unblock" onClick='@command("unblockCard", card=each)'/>
+                </listcell>
+            </listitem>
+        </listbox>
+    </vlayout>
+</window>
+</zk>
+ -->  
+ 
+ 
+ <zk>
+<window title="Manage Existing Cards" border="normal" width="90%" >
+
+    <vlayout spacing="15px">
+        <label value="Issued Cards" style="font-size:18px;font-weight:bold;color:#0a66c2"/>
+
+        <listbox id="cardList" mold="paging" pageSize="5" width="100%">
+            <listhead>
+                <listheader label="Card Number"/>
+                <listheader label="Type"/>
+                <listheader label="Status"/>
+                <listheader label="Action"/>
+            </listhead>
+
+            <template name="model" var="card">
+                <listitem>
+                    <listcell label="${card.cardNumber}"/>
+                    <listcell label="${card.cardType}"/>
+                    <listcell label="${card.status}"/>
+                    <listcell>
+                        <button label="View Details"
+                                onClick='Executions.sendRedirect("cardDetails.zul?cardNo=${card.cardNumber}")'/>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </vlayout>
+</window>
+</zk>
+ 

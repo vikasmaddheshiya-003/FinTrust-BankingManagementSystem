@@ -1,0 +1,121 @@
+<!-- <zk>
+<window title="Card Details" border="normal" width="60%" h b      >
+
+    <vlayout spacing="15px" style="padding:15px">
+        <label value="Card Details" style="font-weight:bold;font-size:18px;color:#0a66c2"/>
+
+        Card Information
+        <grid>
+            <rows>
+                <row>
+                    <label value="Card Number:"/>
+                    <label id="lblCardNo"/>
+                </row>
+                <row>
+                    <label value="Card Type:"/>
+                    <label id="lblType"/>
+                </row>
+                <row>
+                    <label value="Card Status:"/>
+                    <label id="lblStatus" style="color:green"/>
+                </row>
+                <row>
+                    <label value="Maximum Limit:"/>
+                    <label id="lblMaxLimit" value="₹1,00,000"/>
+                </row>
+                <row>
+                    <label value="Current Daily Limit:"/>
+                    <label id="lblCurrentLimit" value="₹50,000"/>
+                </row>
+            </rows>
+        </grid>
+
+        Daily Limit Adjustment Section
+        <separator bar="true" orient="horizontal"/>
+        <label value="Set Daily Limit" style="font-weight:bold;color:#0a66c2"/>
+
+        <hlayout spacing="15px" >
+            <label value="New Limit (₹):"/>
+            <slider id="limitSlider" width="300px" orient="horizontal" minpos="0" maxpos="100000" curpos="50000" />
+            <intbox id="limitBox" value="50000" width="100px"/>
+
+            Sync slider and box
+            <attribute name="onCreate">
+                <![CDATA[
+                    limitSlider.addEventListener("onScroll", event -> limitBox.setValue(limitSlider.getCurpos()));
+                    limitBox.addEventListener("onChange", event -> limitSlider.setCurpos(limitBox.getValue()));
+                ]]>
+            </attribute> 
+
+            <button label="Update Limit" onClick="@command('updateLimit')"/>
+        </hlayout>
+
+        Block/Unblock Actions
+        <separator bar="true" orient="horizontal"/>
+        <hlayout spacing="10px">
+            <button id="btnBlock" label="Block Card" sclass="btn btn-danger" onClick="@command('openOTP', action='block')"/>
+            <button id="btnUnblock" label="Unblock Card" sclass="btn btn-success" onClick="@command('openOTP', action='unblock')"/>
+        </hlayout>
+
+        <button label="Back to Manage Cards" onClick='Executions.sendRedirect("manageCard.zul")'/>
+    </vlayout>
+
+</window>
+</zk>
+ -->  
+ <zk>
+<window title="Card Details" border="normal" hflex="60%" vflex="min"
+       
+        closable="true" sizable="true">
+
+    <vlayout spacing="15px" hflex="1" vflex="min" style="padding:20px">
+        <label value="Card Details" style="font-weight:bold;font-size:18px;color:#0a66c2"/>
+
+        <grid hflex="1">
+            <rows>
+                <row>
+                    <label value="Card Number:" hflex="min"/>
+                    <label id="lblCardNo" hflex="1"/>
+                </row>
+                <row>
+                    <label value="Card Type:" hflex="min"/>
+                    <label id="lblType" hflex="1"/>
+                </row>
+                <row>
+                    <label value="Card Status:" hflex="min"/>
+                    <label id="lblStatus" style="color:green" hflex="1"/>
+                </row>
+                <row>
+                    <label value="Maximum Limit:" hflex="min"/>
+                    <label id="lblMaxLimit" hflex="1"/>
+                </row>
+                <row>
+                    <label value="Set Daily Limit:" hflex="min"/>
+                    <vlayout hflex="1">
+                        <slider id="limitSlider" width="100%" minpos="0" maxpos="50000" orient="horizontal"
+                                onScroll="@command('onSliderChange')" />
+                        <hlayout spacing="5px">
+                            <label value="Selected Limit:"/>
+                            <label id="lblDailyLimit" value="₹0" style="font-weight:bold"/>
+                            <button label="Update Limit" onClick="@command('updateDailyLimit')"/>
+                        </hlayout>
+                    </vlayout>
+                </row>
+            </rows>
+        </grid>
+
+        <separator/>
+
+        <hlayout spacing="10px">
+            <button id="btnBlock" label="Block Card" sclass="btn btn-danger"
+                    onClick="@command('openOTP', action='block')"/>
+            <button id="btnUnblock" label="Unblock Card" sclass="btn btn-success"
+                    onClick="@command('openOTP', action='unblock')"/>
+        </hlayout>
+
+        <separator/>
+
+        <button label="Back to Manage Cards" onClick='Executions.sendRedirect("manageCard.zul")'/>
+    </vlayout>
+</window>
+</zk>
