@@ -51,24 +51,24 @@
                 <rows>
                     <row>
                         <cell>
-                            <div sclass="card-box" onClick='Executions.sendRedirect("Card/ApplyNewCard.zul")'>
+                            <div sclass="card-box"  onClick='Executions.sendRedirect("ApplyNewCard.zul")'>
                                 <label value="💳 Apply for New Card" />
                             </div>
                         </cell>
                         <cell>
-                            <div sclass="card-box" onClick='Executions.sendRedirect("Card/manageCard.zul")'>
+                            <div sclass="card-box" onClick='Executions.sendRedirect("manageCard.zul")'>
                                 <label value="🧾 Manage Existing Card" />
                             </div>
                         </cell>
                     </row>
                     <row>
                         <cell>
-                            <div sclass="card-box" onClick='Executions.sendRedirect("Card/manageCard.zul")'>
+                            <div sclass="card-box" onClick='Executions.sendRedirect("manageCard.zul")'>
                                 <label value="📈 Set Card Limit" />
                             </div>
                         </cell>
                         <cell>
-                            <div sclass="card-box" onClick='Executions.sendRedirect("Card/Card_status.zul")'>
+                            <div sclass="card-box" onClick='Executions.sendRedirect("Card_status.zul")'>
                                 <label value="📦 Track Card Request" />
                             </div>
                         </cell>
@@ -113,4 +113,4 @@
             }
         </style>
     </window>
-</zk>
+</zk>   

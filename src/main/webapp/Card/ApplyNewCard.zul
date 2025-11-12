@@ -68,7 +68,7 @@
  
  <zk>
     <window border="none" width="100%" height="130%"
-           
+           apply="controller.cardApplyPageController"
             style="background: linear-gradient(135deg, #e6f0ff, #ffffff);
                    overflow:auto; padding-bottom:30px;"> <!-- ✅ scroll supported -->
 
@@ -162,7 +162,7 @@
                     <button label="Submit Request" sclass="btn-primary" width="160px"
                            id="submitApplyCard" />
                     <button label=" Cancel" sclass="btn-secondary" width="120px"
-                            onClick="@command('goBack')" />
+                            onClick='Executions.sendRedirect("cardHome.zul")' />
                 </div>
             </div>
         </div>
