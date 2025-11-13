@@ -2,6 +2,7 @@ package Service;
 
 
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +39,35 @@ public class CardServices {
 	 
 	
   }
-  
+
+  public ResultSet getCardList()
+  {
+	  ResultSet rs=null;
+	  String customer_id="chgf";              // select from session 
+	  String sql="select * from  issuedatmcard where customer_id=?";
+	  try {
+		PreparedStatement pstm=DbConnection.getConnection().prepareStatement(sql);
+		pstm.setString(1, customer_id);
+		 rs=pstm.executeQuery();
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	  return rs;
+	  
+  }
+
+  public boolean isCardAlreadyRequested(String accNumber) throws SQLException {
+	    Connection con = DbConnection.getConnection();
+	    PreparedStatement ps = con.prepareStatement(
+	        "SELECT COUNT(*) FROM card_request WHERE account_no=? AND status IN ('PENDING','APPROVED')");
+	    ps.setString(1, accNumber);
+	    ResultSet rs = ps.executeQuery();
+	    rs.next();
+	    return rs.getInt(1) > 0;
+	}
+
  
  
 }

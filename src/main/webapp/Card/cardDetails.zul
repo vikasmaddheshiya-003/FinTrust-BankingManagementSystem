@@ -1,121 +1,88 @@
-<!-- <zk>
-<window title="Card Details" border="normal" width="60%" h b      >
+<zk>
+    <!-- ================= Main Card Details Window ================= -->
+    <window title="💳 Card Details"
+            border="normal"
+            width="100%" height="100%"
+            apply="controller.CardDetailsComposer"
+            style="background:linear-gradient(180deg,#f4f8ff,#ffffff);
+                   border-radius:15px;
+                   box-shadow:0 4px 12px rgba(0,0,0,0.12);
+                   padding:25px;"> 
 
-    <vlayout spacing="15px" style="padding:15px">
-        <label value="Card Details" style="font-weight:bold;font-size:18px;color:#0a66c2"/>
+        <vlayout spacing="0px" width="100%" height="auto">
 
-        Card Information
-        <grid>
-            <rows>
-                <row>
-                    <label value="Card Number:"/>
-                    <label id="lblCardNo"/>
-                </row>
-                <row>
-                    <label value="Card Type:"/>
-                    <label id="lblType"/>
-                </row>
-                <row>
-                    <label value="Card Status:"/>
-                    <label id="lblStatus" style="color:green"/>
-                </row>
-                <row>
-                    <label value="Maximum Limit:"/>
-                    <label id="lblMaxLimit" value="₹1,00,000"/>
-                </row>
-                <row>
-                    <label value="Current Daily Limit:"/>
-                    <label id="lblCurrentLimit" value="₹50,000"/>
-                </row>
-            </rows>
-        </grid>
+            <!-- Header -->
+            <hlayout width="100%" style="justify-content:space-between;align-items:center;">
+                <label value="FinTrust Bank - Card Details"
+                       style="font-size:20px;font-weight:bold;color:#003399;letter-spacing:0.5px;"/>
+                <button label="← Back to Manage Cards"
+                        onClick='Executions.sendRedirect("manageCard.zul")'
+                        style="background:#003399;color:white;border:none;border-radius:8px;
+                               padding:6px 14px;font-weight:500;cursor:pointer;transition:background 0.3s;"/>
+            </hlayout>
 
-        Daily Limit Adjustment Section
-        <separator bar="true" orient="horizontal"/>
-        <label value="Set Daily Limit" style="font-weight:bold;color:#0a66c2"/>
+            <!-- Card Information -->
+            <div style="background:white;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.08);
+                        padding:20px;width:100%;">
+                <label value="Card Information"
+                       style="font-weight:bold;font-size:16px;color:#0a66c2;margin-bottom:10px;"/>
 
-        <hlayout spacing="15px" >
-            <label value="New Limit (₹):"/>
-            <slider id="limitSlider" width="300px" orient="horizontal" minpos="0" maxpos="100000" curpos="50000" />
-            <intbox id="limitBox" value="50000" width="100px"/>
+                <grid width="100%">
+                    <rows>
+                        <row>
+                            <label value="Card Number:" style="color:#333;font-weight:600;"/>
+                            <label id="lblCardNo" style="color:#004aad;font-weight:bold;"/>
+                        </row>
+                        <row>
+                            <label value="Card Type:" style="color:#333;font-weight:600;"/>
+                            <label id="lblType" style="color:#444;"/>
+                        </row>
+                        <row>
+                            <label value="Card Status:" style="color:#333;font-weight:600;"/>
+                            <label id="lblStatus" style="font-weight:bold;color:green;"/>
+                        </row>
+                        <row>
+                            <label value="Maximum Limit:" style="color:#333;font-weight:600;"/>
+                            <label id="lblMaxLimit" style="color:#444;"/>
+                        </row>
+                        <row>
+                            <label value="Set Daily Limit:" style="color:#333;font-weight:600;"/>
+                            <vlayout>
+                                <slider id="limitSlider" width="100%" minpos="0" maxpos="50000"
+                                        orient="horizontal" onScroll="@command('onSliderChange')"
+                                        style="margin-top:8px;"/>
+                                <hlayout spacing="8px">
+                                    <label value="Selected Limit:" style="color:#333;"/>
+                                    <label id="lblDailyLimit" value="₹0"
+                                           style="font-weight:bold;color:#004aad;"/>
+                                    <button label="Update Limit" onClick="@command('updateDailyLimit')"
+                                            style="background:#28a745;color:white;border:none;
+                                                   border-radius:6px;padding:5px 12px;cursor:pointer;
+                                                   font-weight:500;transition:background 0.3s;"/>
+                                </hlayout>
+                            </vlayout>
+                        </row>
+                    </rows>
+                </grid>
+            </div>
 
-            Sync slider and box
-            <attribute name="onCreate">
-                <![CDATA[
-                    limitSlider.addEventListener("onScroll", event -> limitBox.setValue(limitSlider.getCurpos()));
-                    limitBox.addEventListener("onChange", event -> limitSlider.setCurpos(limitBox.getValue()));
-                ]]>
-            </attribute> 
+            <!-- Buttons -->
+            <div style="display:flex;justify-content:center;gap:20px;margin-top:25px;flex-wrap:wrap;"> 
+                <button id="btnBlock" label="Block Card"
+                        onClick="@command('openPopup','action','block')"
+                        style="background:#dc3545;color:white;border:none;border-radius:10px;
+                               padding:10px 22px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.15);
+                               cursor:pointer;transition:background 0.3s;"/>
 
-            <button label="Update Limit" onClick="@command('updateLimit')"/>
-        </hlayout>
+                <button id="btnUnblock" label="Unblock Card"
+                        onClick="@command('openPopup','action','unblock')"
+                        style="background:#28a745;color:white;border:none;border-radius:10px;
+                               padding:10px 22px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.15);
+                               cursor:pointer;transition:background 0.3s;"/>
+            </div>
 
-        Block/Unblock Actions
-        <separator bar="true" orient="horizontal"/>
-        <hlayout spacing="10px">
-            <button id="btnBlock" label="Block Card" sclass="btn btn-danger" onClick="@command('openOTP', action='block')"/>
-            <button id="btnUnblock" label="Unblock Card" sclass="btn btn-success" onClick="@command('openOTP', action='unblock')"/>
-        </hlayout>
+        </vlayout>
+    </window>
 
-        <button label="Back to Manage Cards" onClick='Executions.sendRedirect("manageCard.zul")'/>
-    </vlayout>
-
-</window>
-</zk>
- -->  
- <zk>
-<window title="Card Details" border="normal" hflex="60%" vflex="min"
-       
-        closable="true" sizable="true">
-
-    <vlayout spacing="15px" hflex="1" vflex="min" style="padding:20px">
-        <label value="Card Details" style="font-weight:bold;font-size:18px;color:#0a66c2"/>
-
-        <grid hflex="1">
-            <rows>
-                <row>
-                    <label value="Card Number:" hflex="min"/>
-                    <label id="lblCardNo" hflex="1"/>
-                </row>
-                <row>
-                    <label value="Card Type:" hflex="min"/>
-                    <label id="lblType" hflex="1"/>
-                </row>
-                <row>
-                    <label value="Card Status:" hflex="min"/>
-                    <label id="lblStatus" style="color:green" hflex="1"/>
-                </row>
-                <row>
-                    <label value="Maximum Limit:" hflex="min"/>
-                    <label id="lblMaxLimit" hflex="1"/>
-                </row>
-                <row>
-                    <label value="Set Daily Limit:" hflex="min"/>
-                    <vlayout hflex="1">
-                        <slider id="limitSlider" width="100%" minpos="0" maxpos="50000" orient="horizontal"
-                                onScroll="@command('onSliderChange')" />
-                        <hlayout spacing="5px">
-                            <label value="Selected Limit:"/>
-                            <label id="lblDailyLimit" value="₹0" style="font-weight:bold"/>
-                            <button label="Update Limit" onClick="@command('updateDailyLimit')"/>
-                        </hlayout>
-                    </vlayout>
-                </row>
-            </rows>
-        </grid>
-
-        <separator/>
-
-        <hlayout spacing="10px">
-            <button id="btnBlock" label="Block Card" sclass="btn btn-danger"
-                    onClick="@command('openOTP', action='block')"/>
-            <button id="btnUnblock" label="Unblock Card" sclass="btn btn-success"
-                    onClick="@command('openOTP', action='unblock')"/>
-        </hlayout>
-
-        <separator/>
-
-        <button label="Back to Manage Cards" onClick='Executions.sendRedirect("manageCard.zul")'/>
-    </vlayout>
-</window>
+  
 </zk>

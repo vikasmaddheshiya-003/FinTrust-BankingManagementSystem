@@ -1,5 +1,5 @@
 <!-- <zk>
-<window title="Manage Existing Cards" border="normal" width="90%" >
+<window " width="90%"   >
     <vlayout spacing="15px">
         <listbox id="cardList" mold="paging" pageSize="5" width="100%">
             <listhead>
@@ -25,28 +25,55 @@
  -->  
  
  
- <zk>
-<window title="Manage Existing Cards" border="normal" width="100%" >
+<zk>
+<window title="Manage Existing Cards" border="normal" width="100%" apply="controller.manageCardController">
+    <vlayout spacing="15px" style="padding:20px">
 
-    <vlayout spacing="15px">
-        <label value="Issued Cards" style="font-size:18px;font-weight:bold;color:#0a66c2"/>
+        <!-- 🔙 Back Button -->
+        <hlayout spacing="10px" style="align-items:center;">
+            <button label="← Back"
+                    onClick='Executions.sendRedirect("cardHome.zul")'
+                    style="background:#004080; color:white; border:none; 
+                           border-radius:6px; padding:6px 14px; font-weight:bold;
+                           cursor:pointer; font-size:14px;"/>
+            <label value="Manage Existing Cards" 
+                   style="font-size:20px;font-weight:bold;color:#004080;"/>
+        </hlayout>
 
-        <listbox id="cardList" mold="paging" pageSize="5" width="100%">
+        <!-- Listbox for Issued ATM Cards -->
+        <listbox id="cardListbox" 
+                 mold="paging" 
+                 pageSize="6" 
+                 width="100%" 
+                 height="450px"
+                 style="border:1px solid #ccc; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);"
+                 onSelect=""
+                 >
+                
             <listhead>
-                <listheader label="Card Number"/>
-                <listheader label="Type"/>
-                <listheader label="Status"/>
-                <listheader label="Action"/>
+                <listheader label="ATM Card No" width="18%"/>
+                <listheader label="Customer ID" width="15%"/>
+                <listheader label="Account No" width="15%"/>
+                <listheader label="Issued Date" width="12%"/>
+                <listheader label="Expiry Date" width="12%"/>
+                <listheader label="Status" width="10%"/>
+                <listheader label="Action" width="18%"/>
             </listhead>
 
-            <template name="model" var="card">
+            <!-- Row template -->
+            <template name="model">
                 <listitem>
-                    <listcell label="${card.cardNumber}"/>
-                    <listcell label="${card.cardType}"/>
-                    <listcell label="${card.status}"/>
-                    <listcell>
-                        <button label="View Details"
-                                onClick='Executions.sendRedirect("cardDetails.zul?cardNo=${card.cardNumber}")'/>
+                    <listcell  label="${each[0]}"/>  <!-- ATM card number -->
+                    <listcell  label="${each[1]}"/>  <!-- Customer ID -->
+                    <listcell  label="${each[2]}"/>  <!-- Account number -->
+                    <listcell  label="${each[5]}"/>  <!-- Issued date -->
+                    <listcell  label="${each[6]}"/>  <!-- Expiry date -->
+                    <listcell  label="${each[7]}"/>  <!-- Status -->
+                    <listcell  >
+                        <button   label="Manage"
+                                sclass="btn btn-primary"
+                                style="padding:4px 10px; font-size:13px; background:#0a66c2; color:white; border:none; border-radius:6px;"
+                               />
                     </listcell>
                 </listitem>
             </template>
@@ -54,4 +81,5 @@
     </vlayout>
 </window>
 </zk>
+
  

@@ -76,48 +76,63 @@ public class cardApplyPageController extends SelectorComposer<Window>{
 		
 	}
 
-	  @Listen("onClick=#submitApplyCard")
-     public  void submitCardRequest()
-    {
-		  
-	   String accNumber=accountList.getValue();
-       String cardTypes=cardType.getSelectedItem().getValue();
-       String cardCat=cardCategory.getValue();
-       String addresss=address.getValue();
-       String remark=remarks.getValue();
-       boolean isMarkCheck= terms.isChecked();
+    @Listen("onClick=#submitApplyCard")
+    public void submitCardRequest() {
+        String accNumber = accountList.getValue();
+        String cardTypes = cardType.getSelectedItem().getValue();
+        String cardCat = cardCategory.getValue();
+        String addresss = address.getValue();
+        String remark = remarks.getValue();
+        boolean isMarkCheck = terms.isChecked();
+
+        // Validate
+        if (accNumber.isEmpty()) {
+            Clients.showNotification("⚠️ Please select an Account Number.", "warning", null, "top_center", 3000);
+            return;
+        }
+
+        if (cardTypes.isEmpty()) {
+            Clients.showNotification("⚠️ Please select a Card Type.", "warning", null, "top_center", 3000);
+            return;
+        }
+
+        if (cardCat.isEmpty()) {
+            Clients.showNotification("⚠️ Please select a Card Category.", "warning", null, "top_center", 3000);
+            return;
+        }
+
+        if (addresss.isEmpty()) {
+            Clients.showNotification("⚠️ Please enter your Address.", "warning", null, "top_center", 3000);
+            return;
+        }
+
+        if (!isMarkCheck) {
+            Clients.showNotification("⚠️ Please accept the Terms and Conditions.", "warning", null, "top_center", 3000);
+            return;
+        }
+
        
-//       if(accNumber.length()<10||accNumber.isEmpty())
-//       {
-//    	   alert("Account Number must be in 10 Digits");
-//       }else {
-//    	   
-//    	   if(isMarkCheck==false)
-//    	   {
-//    		 alert("Please, Accept Term and Condition!!");
-//    	   }
-//    	   else {
-//    		  }
-//    	   
-//       }
-       
-       
-       if(isMarkCheck)
-       {
-    	  try {
-			cardService.submitCardRequest(accNumber, cardTypes, cardCat, addresss, remark); 
-			alert("card requested succesfully!!!!!!!!!!!!!!!");
-		  } catch (SQLException e) {
-			// TODO Auto-generated catch block
-		     Clients.showNotification(e.getMessage());
-		  }  
-       }
-       else {
-    	   alert("please , Accept term and condition !!!!");
-       }
-      
-       
+
+        try {
+//            if (cardService.isCardAlreadyRequested(accNumber)) {
+//                Clients.showNotification("A card is already requested for this account.", "error", null, "middle_center", 4000);
+//                return;
+//            }
+
+            cardService.submitCardRequest(accNumber, cardTypes, cardCat, addresss, remark);
+            Clients.showNotification("Card request submitted successfully!", "info", null, "top_center", 3000);
+
+            // Clear form
+            accountList.setValue("");
+            address.setValue("");
+            remarks.setValue("");
+            terms.setChecked(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Clients.showNotification("Error: " + e.getMessage(), "error", null, "top_center", 4000);
+        }
     }
+
     
  
 	
