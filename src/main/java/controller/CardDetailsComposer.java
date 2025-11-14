@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import dao.DbConnection;
@@ -20,7 +21,7 @@ import dao.DbConnection;
 public class CardDetailsComposer extends SelectorComposer<Window> {
 
 	@Wire
-	Label lblCardNo,lblType,lblMaxLimit,lblStatus;
+	Label lblCardNo,lblType,lblMaxLimit,lblStatus,lblCurLimit,lblDailyLimit;
 	
 	@Wire
 	Button btnBlock,btnUnblock;
@@ -125,5 +126,13 @@ public class CardDetailsComposer extends SelectorComposer<Window> {
        
 	 }
 	
+	
+	
+	@Listen("onClick=#btnUpdateLimit")
+	public void updateLimit()
+	{
+		lblCurLimit.setValue(lblDailyLimit.getValue());
+		Messagebox.show("Daily Limit Updated.");
+	}
 
 }

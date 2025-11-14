@@ -151,12 +151,12 @@ public class manageCardController extends SelectorComposer<Window> {
     @Wire
     private Listbox cardListbox;  
     
-   
-  
-    
+     
     @Wire
     private Button manageBtn;
 
+    
+    
     @Override
     public void doAfterCompose(Window comp) throws Exception {
         super.doAfterCompose(comp);
@@ -193,30 +193,17 @@ public class manageCardController extends SelectorComposer<Window> {
         }
     }
     
-    
-    
+   
 
        
-//    @Listen("onClick=button")
-//    public void showCardDetails(Event e) {
-//    	 alert("jgjgjgjhjhhhhhhhhhhhhhhhhhgj");
-////        Component btn = e.getTarget();
-////        Listitem item = (Listitem) btn.getParent().getParent();
-////         
-////        String s= e.getTarget().getParent().getParent().
-////        String atmNumber = ((Listcell) item.getChildren().get(0)).getLabel();              
-////        System.out.println(atmNumber);
-////        Messagebox.show("Selected ATM Number: " + atmNumber);
-//    	 
-//    	 
-//    	 
-//    }
+
     
     @Listen("onClick=button")
     public void showDetails(Event e)
     {
-     
+       
          Component targetButton= e.getTarget();
+       
           Listitem item =  (Listitem) targetButton.getParent().getParent();
          //  List<Listcell> lc= items.getChildren();
          //    Listcell ll  =((Listcell) lc.get(0));
@@ -226,11 +213,9 @@ public class manageCardController extends SelectorComposer<Window> {
           String atmNumber = ((Listcell) item.getChildren().get(0)).getLabel();        
           Sessions.getCurrent().setAttribute("atmNumber", atmNumber);
           Executions.sendRedirect("/Card/cardDetails.zul");
-            
+             
     }
-    
-    
-    
+  
 }
 
 

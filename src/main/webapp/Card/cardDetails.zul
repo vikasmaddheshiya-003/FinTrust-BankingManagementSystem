@@ -42,25 +42,34 @@
                             <label id="lblStatus" style="font-weight:bold;color:green;"/>
                         </row>
                         <row>
-                            <label value="Maximum Limit:" style="color:#333;font-weight:600;"/>
+                            <label value="Maximum Daily Limit:" style="color:#333;font-weight:600;"/>
                             <label id="lblMaxLimit" style="color:#444;"/>
+                        </row>
+                          <row>
+                            <label value="Current Daily Limit:" style="color:#333;font-weight:600;"/>
+                            <label id="lblCurLimit" value="50000" style="color:#444;"/>
                         </row>
                         <row>
                             <label value="Set Daily Limit:" style="color:#333;font-weight:600;"/>
-                            <vlayout>
-                                <slider id="limitSlider" width="100%" minpos="0" maxpos="50000"
-                                        orient="horizontal" onScroll="@command('onSliderChange')"
-                                        style="margin-top:8px;"/>
-                                <hlayout spacing="8px">
-                                    <label value="Selected Limit:" style="color:#333;"/>
-                                    <label id="lblDailyLimit" value="₹0"
-                                           style="font-weight:bold;color:#004aad;"/>
-                                    <button label="Update Limit" onClick="@command('updateDailyLimit')"
-                                            style="background:#28a745;color:white;border:none;
-                                                   border-radius:6px;padding:5px 12px;cursor:pointer;
-                                                   font-weight:500;transition:background 0.3s;"/>
-                                </hlayout>
-                            </vlayout>
+                          <vlayout>
+    <slider id="limitSlider"
+        width="100%" minpos="0" maxpos="50000"
+        orient="horizontal"
+        onScroll="lblDailyLimit.setValue('₹' + String.valueOf(event.pos));"
+        style="margin-top:8px;"/>
+
+    <hlayout spacing="8px">
+        <label value="Selected Limit:" style="color:#333;"/>
+        <label id="lblDailyLimit" value="₹0"
+               style="font-weight:bold;color:#004aad;"/>
+
+        <button id="btnUpdateLimit" label="Update Limit"
+                style="background:#28a745;color:white;border:none;
+                       border-radius:6px;padding:5px 12px;cursor:pointer;
+                       font-weight:500;transition:background 0.3s;"/>
+    </hlayout>
+</vlayout>
+
                         </row>
                     </rows>
                 </grid>

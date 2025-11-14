@@ -1,35 +1,11 @@
-<!-- <zk>
-<window " width="90%"   >
-    <vlayout spacing="15px">
-        <listbox id="cardList" mold="paging" pageSize="5" width="100%">
-            <listhead>
-                <listheader label="Card Number"/>
-                <listheader label="Type"/>
-                <listheader label="Status"/>
-                <listheader label="Action"/>
-            </listhead>
-            <listitem forEach="${cards}">
-                <listcell label="${each.cardNumber}"/>
-                <listcell label="${each.cardType}"/>
-                <listcell label="${each.status}"/>
-                <listcell>
-                    <button  label="Block" />
-                    <button label="Unblock" onClick='@command("unblockCard", card=each)'/>
-                </listcell>
-            </listitem>
-        </listbox>
-    </vlayout>
-    
-</window>
-</zk>
- -->  
+
  
  
 <zk>
 <window title="Manage Existing Cards" border="normal" width="100%" apply="controller.manageCardController">
     <vlayout spacing="15px" style="padding:20px">
 
-        <!-- 🔙 Back Button -->
+       
         <hlayout spacing="10px" style="align-items:center;">
             <button label="← Back"
                     onClick='Executions.sendRedirect("cardHome.zul")'
@@ -40,7 +16,7 @@
                    style="font-size:20px;font-weight:bold;color:#004080;"/>
         </hlayout>
 
-        <!-- Listbox for Issued ATM Cards -->
+     
         <listbox id="cardListbox" 
                  mold="paging" 
                  pageSize="6" 
@@ -60,15 +36,15 @@
                 <listheader label="Action" width="18%"/>
             </listhead>
 
-            <!-- Row template -->
+      
             <template name="model">
                 <listitem>
-                    <listcell  label="${each[0]}"/>  <!-- ATM card number -->
-                    <listcell  label="${each[1]}"/>  <!-- Customer ID -->
-                    <listcell  label="${each[2]}"/>  <!-- Account number -->
-                    <listcell  label="${each[5]}"/>  <!-- Issued date -->
-                    <listcell  label="${each[6]}"/>  <!-- Expiry date -->
-                    <listcell  label="${each[7]}"/>  <!-- Status -->
+                    <listcell  label="${each[0]}"/> 
+                    <listcell  label="${each[1]}"/>  
+                    <listcell  label="${each[2]}"/> 
+                    <listcell  label="${each[5]}"/>
+                    <listcell  label="${each[6]}"/>  
+                    <listcell  label="${each[7]}"/> 
                     <listcell  >
                         <button   label="Manage"
                                 sclass="btn btn-primary"
