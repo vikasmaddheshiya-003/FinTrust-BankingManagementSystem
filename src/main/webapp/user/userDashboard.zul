@@ -1,0 +1,99 @@
+<!-- ============================================================
+ Page Name: userDashboard.zul
+ Purpose: Displays user overview after login.
+ Features: Shows account summary, recent transactions, quick links.
+ Controller: UserDashboardController.java
+ ============================================================ -->
+ 
+<?page title="Dashboard - FinTrust Bank" contentType="text/html;charset=UTF-8"?>
+<!-- Dashboard css -->
+<?link rel="stylesheet" type="text/css" href="/resources/css/dashboard.css"?>
+<!-- Profile css -->
+<?link rel="stylesheet" type="text/css" href="/resources/css/profile.css"?>
+<!-- head footer csss -->
+<?link rel="stylesheet" type="text/css" href="/resources/css/header-footer.css"?>
+<!-- Global css -->
+<?link rel="stylesheet" type="text/css" href="/resources/css/global.css"?>
+
+
+<!-- Before loading page it ensuer page should not render -->
+<?init class = "com.fintrust.controller.AuthenticationController" ?>
+
+<zk xmlns:h="xhtml">
+<style>
+.z-north, .z-west, .z-center, .z-south, .z-east {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+.z-splitter, .z-splitter-btn {
+    width: 0 !important;
+    background: none !important;
+    border: none !important;
+}
+
+</style>
+  <!-- Use borderlayout for predictable ZK structure -->
+  <borderlayout  sclass="dashboard-window" apply="com.fintrust.controller.UserDashboardController_copy">
+
+    <!-- NORTH: Top header (compact) -->
+  <north >    
+    <!--  <include src = "/WEB-INF/components/privateNavbar.zul" />  -->
+     <privateNavbar width="100%"></privateNavbar>
+    </north> 
+
+    <!-- WEST: Sidebar navigation -->  <!-- viewModel="@id('vm') @init('com.fintrust.controller.UserDashboardController')" -->
+    <west closable="true" collapsible="true" size="240px"  splittable="true"  >
+      <vbox sclass="sidebar" spacing="12px" >
+        <h:div sclass="sidebar-brand">
+          <image src="/resources/images/logo.png" sclass="sidebar-logo-img"/>
+          <label value="FinTrust" sclass="sidebar-title"/>
+        </h:div>
+
+<!-- MVC  -->
+        <vbox sclass="sidebar-menu" vflex="1" spacing="6px" >
+          <toolbarbutton label="Dashboard" sclass="menu-item active" id = "userdashboard"/>
+          <toolbarbutton label="open Accounts" sclass="menu-item" id = "account"/>
+          <toolbarbutton label="view Accounts" sclass="menu-item" id = "viewAccounts"/>
+          <toolbarbutton label="Transactions" sclass="menu-item" id = "transactions"/>
+          <toolbarbutton label="Cards" sclass="menu-item" id = "cards"/>
+          <toolbarbutton label="Profile" sclass="menu-item" id = "profile"/>
+        </vbox>
+        
+        <!-- MVVM -->
+<!-- 
+    <vbox sclass="sidebar-menu" vflex="1" spacing="6px" >
+          <toolbarbutton label="Dashboard" sclass="menu-item active" onClick="@command('go','dashboard')"/>
+          <toolbarbutton label="open Accounts" sclass="menu-item" onClick="@command('go','accounts')"/>
+          <toolbarbutton label="Transactions" sclass="menu-item" onClick="@command('go','transactions')"/>
+          <toolbarbutton label="Cards" sclass="menu-item" onClick="@command('go','cards')"/>
+          <toolbarbutton label="Profile" sclass="menu-item" onClick="@command('go','profile')"/>
+        </vbox> -->
+
+        <div sclass="sidebar-footer">
+          <label value="Need help?"/> <separator/>
+          <button label="Support" sclass="support-btn" onClick='Executions.sendRedirect("/contact-us.zul")'/>
+        </div>
+      </vbox>
+    </west>
+
+    <!-- CENTER: Main content area -->
+   
+    <center sclass = "zero-padding">
+    <!-- User dashboard content -->
+    <h:div >
+     <include id = "main_content_sec" src="/WEB-INF/components/dashboard.zul" visible="true"/> 
+      <!-- <include id = "profile_sec" src = "userProfile.zul" visible="false"/>
+      <include id = "otp_sec" src = "/WEB-INF/components/otpPage.zul" visible="false" />
+       <include id = "changePassword_sec" src = "/WEB-INF/components/otpPage.zul"  visible="false"/>
+      <include id = "openAccount_sec" src = "/WEB-INF/components/openNewAccount.zul" visible="false" />   
+      <include id = "viewAllAccount_sec" src = "/WEB-INF/components/view_all_account.zul" visible="false" />   
+        -->
+      </h:div>
+    </center>
+
+  </borderlayout>
+</zk>
+
+
